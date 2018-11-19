@@ -1,8 +1,13 @@
-#字典中的键映射多个值
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# __author__ = 'liao gao xiang'
+
+# 字典中的键映射多个值
 from collections import defaultdict
+
 d = defaultdict(list)
 print(d)
-d['a'].append([1,2,3])
+d['a'].append([1, 2, 3])
 d['b'].append(2)
 d['c'].append(3)
 

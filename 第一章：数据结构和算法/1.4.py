@@ -1,10 +1,15 @@
-import heapq
-#从一个集合获取最大或者最小的n个元素
-nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2]
-print(heapq.nlargest(3, nums)) # Prints [42, 37, 23]
-print(heapq.nsmallest(3, nums)) # Prints [-4, 1, 2]
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# __author__ = 'liao gao xiang'
 
-#nlargest() 和 nsmallest()接受一个关键字参数，用于更复杂的数据结构中
+import heapq
+
+# 从一个集合获取最大或者最小的n个元素
+nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2]
+print(heapq.nlargest(3, nums))  # Prints [42, 37, 23]
+print(heapq.nsmallest(3, nums))  # Prints [-4, 1, 2]
+
+# nlargest() 和 nsmallest()接受一个关键字参数，用于更复杂的数据结构中
 portfolio = [
     {'name': 'IBM', 'shares': 100, 'price': 91.1},
     {'name': 'AAPL', 'shares': 50, 'price': 543.22},
@@ -18,10 +23,10 @@ expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
 print(cheap)
 print(expensive)
 
-info = [lambda a:a**3,lambda b:b**3]
+info = [lambda a: a ** 3, lambda b: b ** 3]
 print(info)
 
-'''
+"""
 >>> nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2]
 >>> import heapq
 >>> heapq.heapify(nums)
@@ -44,8 +49,4 @@ print(info)
 类似的，如果N的大小和集合大小接近的时候，
 通常先排序这个集合然后再使用切片操作会更快点 ( sorted(items)[:N] 或者是 sorted(items)[-N:] )。
 需要在正确场合使用函数 nlargest() 和 nsmallest() 才能发挥它们的优势 (如果N快接近集合大小了，那么使用排序操作会更好些)。
-
-尽管你没有必要一定使用这里的方法，但是堆数据结构的实现是一个很有趣并且值得你深入学习的东西。
-基本上只要是数据结构和算法书籍里面都会有提及到。
-heapq 模块的官方文档里面也详细的介绍了堆数据结构底层的实现细节。
-'''
+"""
