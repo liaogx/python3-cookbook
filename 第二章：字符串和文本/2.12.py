@@ -1,38 +1,45 @@
-#审查清理文本字符串
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# __author__ = 'liao gao xiang'
+
+import sys
+import unicodedata
+
+# 审查清理文本字符串
 s = 'pýtĥöñ\fis\tawesome\r\n'
-#第一步是清理空白字符。为了这样做，先创建一个小的转换表格然后使用 translate() 方法：
+# 第一步是清理空白字符。为了这样做，先创建一个小的转换表格然后使用translate() 方法：
 remap = {
-    ord('\t'):' ',
-    ord('\f'):' ',
-    ord('\r'):None,
-    ord('\n'):None
+    ord('\t'): ' ',
+    ord('\f'): ' ',
+    ord('\r'): None,
+    ord('\n'): None
 }
 a = s.translate(remap)
-print(s.translate(remap))
-'''
+print(a)
+"""
 你可以以这个表格为基础进一步构建更大的表格。比如让我们删除所有的和音符
 通过使用 dict.fromkeys() 方法构造一个字典，
 每个Unicode和音符作为键，# 对应的值全部为 None 。
 然后使用 unicodedata.normalize() 将原始输入标准化为分解形式字符。
 然后再调用 translate 函数删除所有重音符。
 同样的技术也可以被用来删除其他类型的字符(比如控制字符等)。
-'''
-import unicodedata
-import sys
+"""
+
 cmb_chrs = dict.fromkeys(c for c in range(sys.maxunicode) if unicodedata.combining(chr(c)))
-b = unicodedata.normalize('NFD',a)
-print(unicodedata.normalize('NFD',a))
+b = unicodedata.normalize('NFD', a)
+print(b)
 print(b.translate(cmb_chrs))
-#作为另一个例子，这里构造一个将所有Unicode数字字符映射到对应的ASCII字符上的表格：
-digitmap = {c:ord('0') + unicodedata.digit(chr(c)) for c in range(sys.maxunicode) if unicodedata.category(chr(c)) == 'Nd'}
+# 作为另一个例子，这里构造一个将所有Unicode数字字符映射到对应的ASCII字符上的表格：
+digitmap = {c: ord('0') + unicodedata.digit(chr(c)) for c in range(sys.maxunicode) if unicodedata.category(chr(c)) == 'Nd'}
 print(len(digitmap))
 x = '\u0661\u0662\u0663'
 print(x.translate(digitmap))
 
-b = unicodedata.normalize('NFD',a)
-print(b.encode('ascii','ignore').decode('ascii'))
-#这里的标准化操作将原来的文本分解为单独的和音符。接下来的ASCII编码/解码只是简单的一下子丢弃掉那些字符。 当然，这种方法仅仅只在最后的目标就是获取到文本对应ACSII表示的时候生效。
-'''
+b = unicodedata.normalize('NFD', a)
+print(b.encode('ascii', 'ignore').decode('ascii'))
+# 这里的标准化操作将原来的文本分解为单独的和音符。接下来的ASCII编码/解码只是简单的一下子丢弃掉那些字符。
+# 当然，这种方法仅仅只在最后的目标就是获取到文本对应ACSII表示的时候生效。
+"""
 文本字符清理一个最主要的问题应该是运行的性能。一般来讲，代码越简单运行越快。
 对于简单的替换操作， str.replace() 方法通常是最快的，甚至在你需要多次调用的时候。 比如，为了清理空白字符，你可以这样做：
 def clean_spaces(s):
@@ -46,12 +53,4 @@ def clean_spaces(s):
 不幸的是，我们不可能给你建议一个特定的技术，使它能够适应所有的情况。
 因此实际情况中需要你自己去尝试不同的方法并评估它。
 尽管这一节集中讨论的是文本，但是类似的技术也可以适用于字节，包括简单的替换，转换和正则表达式。
-'''
-
-
-
-
-
-
-
-
+"""

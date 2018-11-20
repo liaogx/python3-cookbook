@@ -1,12 +1,13 @@
-#实现一个简单的地柜下降分解器
 #!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+# -*- coding:utf-8 -*-
+# __author__ = 'liao gao xiang'
+
 """
-Topic: 下降解析器
+Topic: 下实现一个简单的递归下降分解器
 Desc :
 """
-import re
 import collections
+import re
 
 # Token specification
 NUM = r'(?P<NUM>\d+)'
@@ -131,10 +132,3 @@ def descent_parser():
 
 if __name__ == '__main__':
     descent_parser()
-
-
-#本小结完全不懂
-#http://python3-cookbook.readthedocs.io/zh_CN/latest/c02/p19_writing_recursive_descent_parser.html
-
-
-
