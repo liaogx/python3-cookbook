@@ -1,23 +1,31 @@
-#实现迭代器协议，你想构建一个能支持迭代操作的自定义对象，并希望找到一个能够实现迭代协议的简单方法
-#目前为止，在一个对象上实现迭代最简单的方式是使用一个生成器函数。 在4.2小节中，使用Node类来表示树形数据结构。你可能想实现一个以深度优先方式遍历树形节点的生成器。 下面是代码示例：
-class Node:
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# __author__ = 'liao gao xiang'
+
+# 实现迭代器协议，你想构建一个能支持迭代操作的自定义对象，并希望找到一个能够实现迭代协议的简单方法
+# 目前为止，在一个对象上实现迭代最简单的方式是使用一个生成器函数。
+# 在4.2小节中，使用Node类来表示树形数据结构。你可能想实现一个以深度优先方式遍历树形节点的生成器。下面是代码示例：
+
+
+class Node(object):
     def __init__(self, value):
         self._value = value
         self._children = []
 
     def __repr__(self):
-        return 'Node({!r})'.format(self._value)
-
-    def add_child(self, node):
-        self._children.append(node)
+        return "Node({!r})".format(self._value)
 
     def __iter__(self):
         return iter(self._children)
+
+    def add_child(self, node):
+        self._children.append(node)
 
     def depth_first(self):
         yield self
         for c in self:
             yield from c.depth_first()
+
 
 # Example
 if __name__ == '__main__':
@@ -33,8 +41,11 @@ if __name__ == '__main__':
     for ch in root.depth_first():
         print(ch)
     # Outputs Node(0), Node(1), Node(3), Node(4), Node(2), Node(5)
-#Python的迭代协议要求一个 __iter__() 方法返回一个特殊的迭代器对象， 这个迭代器对象实现了 __next__() 方法并通过 StopIteration 异常标识迭代的完成。 但是，实现这些通常会比较繁琐。 下面我们演示下这种方式，如何使用一个关联迭代器类重新实现 depth_first() 方法：
-class Node2:
+
+
+# Python的迭代协议要求一个 __iter__() 方法返回一个特殊的迭代器对象，这个迭代器对象实现了 __next__()方法并通过StopIteration异常标识迭代的完成。
+# 但是，实现这些通常会比较繁琐。下面我们演示下这种方式，如何使用一个关联迭代器类重新实现 depth_first() 方法：
+class Node2(object):
     def __init__(self, value):
         self._value = value
         self._children = []
@@ -53,9 +64,9 @@ class Node2:
 
 
 class DepthFirstIterator(object):
-    '''
+    """
     Depth-first traversal
-    '''
+    """
 
     def __init__(self, start_node):
         self._node = start_node
@@ -82,12 +93,6 @@ class DepthFirstIterator(object):
         else:
             self._child_iter = next(self._children_iter).depth_first()
             return next(self)
-#DepthFirstIterator 类和上面使用生成器的版本工作原理类似， 但是它写起来很繁琐，因为迭代器必须在迭代处理过程中维护大量的状态信息。 坦白来讲，没人愿意写这么晦涩的代码。将你的迭代器定义为一个生成器后一切迎刃而解。
 
-
-
-
-
-
-
-
+# DepthFirstIterator 类和上面使用生成器的版本工作原理类似， 但是它写起来很繁琐，因为迭代器必须在迭代处理过程中维护大量的状态信息。
+# 坦白来讲，没人愿意写这么晦涩的代码。将你的迭代器定义为一个生成器后一切迎刃而解。

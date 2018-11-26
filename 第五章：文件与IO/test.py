@@ -1,6 +1,6 @@
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# __author__ = 'liaogx'
-
+# __author__ = 'liao gao xiang'
 
 # def manual_iter():
 #     with open('test.txt') as f:
@@ -71,7 +71,7 @@
 # print(next(num))
 # print(next(num))
 # print(next(num))
-# class Test:
+# class Test(object):
 #     def prt(sef):
 #         print(sef)
 #         print(sef.__class__)
@@ -305,7 +305,7 @@
 #     print(p.voltage)
 
 
-# class Normal:
+# class Normal(object):
 #     def __init__(self):
 #         self.__x = None
 #
@@ -446,12 +446,12 @@
 #
 # print(set(qsort(list1 + list2)))
 
-# '''
+# """
 # 静态函数(@staticmethod): 即静态方法,主要处理与这个类的逻辑关联, 如验证数据;
 # 类函数(@classmethod):即类方法, 更关注于从类中调用方法, 而不是在实例中调用方法, 如构造重载;
 # 成员函数: 实例的方法, 只能通过实例进行调用;
 #
-# '''
+# """
 # class A(object):
 #
 #     _g = 1
@@ -477,12 +477,12 @@
 # print(a.class_foo)
 # print(a.static_foo)
 #
-# '''
+# """
 # 具体应用:
 # 比如日期的方法, 可以通过实例化(__init__)进行数据输出;
 # 可以通过类方法(@classmethod)进行数据转换;
 # 可以通过静态方法(@staticmethod)进行数据验证;
-# '''
+# """
 #
 # class Date(object):
 #     day = 0
@@ -765,7 +765,7 @@ from timeit import Timer
 
 
 def t1():
-    li = [ _ for _ in range(10000)]
+    li = [_ for _ in range(10000)]
 
 
 def t2():
@@ -777,6 +777,7 @@ def t3():
     for i in range(10000):
         # li = li + [i]       # Python中'+='被优化，相当于直接在li上append
         li += [i]
+
 
 def t4():
     li = []
@@ -793,7 +794,8 @@ def t5():
 def t6():
     li = []
     for i in range(10000):
-        li.insert(0,i)
+        li.insert(0, i)
+
 
 timer1 = Timer("t1()", "from __main__ import t1")
 timer2 = Timer("t2()", "from __main__ import t2")
@@ -807,21 +809,3 @@ print('list相加用时：', timer3.timeit(1000))
 print('append用时：', timer4.timeit(1000))
 print('extend用时：', timer5.timeit(1000))
 print('insert用时：', timer6.timeit(1000))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
