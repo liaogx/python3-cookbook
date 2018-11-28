@@ -3,7 +3,7 @@
 # __author__ = 'liao gao xiang'
 
 # def manual_iter():
-#     with open('test.txt') as f:
+#     with open('file.txt') as f:
 #         try:
 #             while True:
 #                 line = next(f, None)
@@ -83,7 +83,7 @@
 # for x in reversed(a):
 #     print(x)
 
-# with open('test.txt') as f:
+# with open('file.txt') as f:
 #     for line in reversed(list(f)):
 #         print(line, end='')
 
@@ -112,7 +112,7 @@
 
 # from collections import deque
 # dq = deque(maxlen=10)
-# with open('test.txt', encoding='utf8') as f:
+# with open('file.txt', encoding='utf8') as f:
 #     for line_number, content in enumerate(f, start=1):
 #         dq.append((line_number, content))
 # print(dq)
@@ -134,7 +134,7 @@
 #     def clear(self):
 #         self.history.clear()  # 清空deque队列
 
-# with open('test.txt', encoding='utf8') as f:
+# with open('file.txt', encoding='utf8') as f:
 #     lines = LineHistory(f)
 #     for line in lines:
 #         if 'python' in line:

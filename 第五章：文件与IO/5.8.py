@@ -1,33 +1,31 @@
-#固定大小记录的文件迭代
-#你想在一个固定长度记录或者数据块的集合上迭代，而不是在一个文件中一行一行的迭代
-#通过下面这个小技巧使用 iter 和 functools.partial() 函数：
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# __author__ = 'liao gao xiang'
+
+# 固定大小记录的文件迭代
+# 你想在一个固定长度记录或者数据块的集合上迭代，而不是在一个文件中一行一行的迭代
+# 通过下面这个小技巧使用 iter 和 functools.partial() 函数：
 from functools import partial
+
 RECORD_SIZE = 32
-with open('test.txt','rb') as f:
-    records = iter(partial(f.read,RECORD_SIZE),b'')
+with open('file.txt', 'rb') as f:
+    records = iter(partial(f.read, RECORD_SIZE), b'')
     for r in records:
-        pass
+        print(r)
 
 print(int('12345'))
-print(int('11111',base=8))
-import functools
-foo = functools.partial(int,base=8) #生成一个固定参数的新函数
+print(int('11111', base=8))
+
+foo = partial(int, base=8)  # 生成一个固定参数的新函数
 print(foo('111111'))
 print('++++++++++++++++++')
-def int2(x,base=2):
-    return int(x,base)
+
+
+def int2(x, base=2):
+    return int(x, base)
+
+
 print(int2('1111'))
 
-list = [1,2,3]
-
-for i in iter(list):
-    print(i)
-
-'''
-实在是看不下去了，概念完全都不懂
-迭代器？生成器？类？对象？属性？方法？
-'''
-
-
-
-
+# iter() 函数有一个鲜为人知的特性就是，如果你给它传递一个可调用对象和一个
+# 标记值，它会创建一个迭代器。这个迭代器会一直调用传入的可调用对象直到它返回标记值为止，这时候迭代终止。
